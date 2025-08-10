@@ -662,50 +662,52 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               : const Color(0xFFE7ECF3),
         ),
       ),
-      child: Row(
-        children: items.map((e) {
-          final isActive = e.$4;
-          return InkWell(
-            onTap: () {
-              setState(() {
-                switchToEditMode = e.$1 == "수정";
-                switchToDeleteMode = e.$1 == "삭제";
-                switchToViewMode = e.$1 == "상세";
-                currentMode = switchToEditMode
-                    ? "edit"
-                    : switchToDeleteMode
-                    ? "delete"
-                    : switchToViewMode
-                    ? "view"
-                    : "";
-              });
-              HapticFeedback.lightImpact();
-            },
-            borderRadius: BorderRadius.circular(12),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              decoration: BoxDecoration(
-                color: isActive ? e.$3.withOpacity(0.12) : Colors.transparent,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  Icon(e.$2, size: 18, color: isActive ? e.$3 : _muted),
-                  const SizedBox(width: 6),
-                  Text(
-                    e.$1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: isActive ? e.$3 : _muted,
+      child: Expanded(
+        child: Row(
+          children: items.map((e) {
+            final isActive = e.$4;
+            return InkWell(
+              onTap: () {
+                setState(() {
+                  switchToEditMode = e.$1 == "수정";
+                  switchToDeleteMode = e.$1 == "삭제";
+                  switchToViewMode = e.$1 == "상세";
+                  currentMode = switchToEditMode
+                      ? "edit"
+                      : switchToDeleteMode
+                      ? "delete"
+                      : switchToViewMode
+                      ? "view"
+                      : "";
+                });
+                HapticFeedback.lightImpact();
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isActive ? e.$3.withOpacity(0.12) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(e.$2, size: 18, color: isActive ? e.$3 : _muted),
+                    const SizedBox(width: 4),
+                    Text(
+                      e.$1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: isActive ? e.$3 : _muted,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                ],
+                    const SizedBox(width: 4),
+                  ],
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
